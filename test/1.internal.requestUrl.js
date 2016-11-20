@@ -16,27 +16,29 @@ describe("INTERNAL -- requestUrl", function()
 	
 	it("resolves a promise", function(done)
 	{
+		const auth = {};
 		const options = helpers.options();
 		const url = new URL("http://blc/normal/index.html");
 		
-		requestUrl(url, "get", options).then(result => done());
+		requestUrl(url, auth, "get", options).then(result => done());
 	});
 	
 	
 	
 	it("receives a GET stream", function()
 	{
+		const auth = {};
 		const options = helpers.options();
 		const url = new URL("http://blc/normal/index.html");
 		
-		return requestUrl(url, "get", options).then(result =>
+		return requestUrl(url, auth, "get", options).then(result =>
 		{
 			expect(result.response).to.be.like(
 			{
 				headers: { "content-type": "text/html" },
 				status: 200,
 				statusText: null,
-				//url: "http://blc:80/normal/index.html",
+				//url:  { href:"http://blc:80/normal/index.html" },
 				redirects: [],
 			});
 			
@@ -48,17 +50,18 @@ describe("INTERNAL -- requestUrl", function()
 	
 	it("does not receive a HEAD stream", function()
 	{
+		const auth = {};
 		const options = helpers.options();
 		const url = new URL("http://blc/normal/index.html");
 		
-		return requestUrl(url, "head", options).then(result =>
+		return requestUrl(url, auth, "head", options).then(result =>
 		{
 			expect(result.response).to.be.like(
 			{
 				headers: { "content-type": "text/html" },
 				status: 200,
 				statusText: null,
-				//url: "http://blc:80/normal/index.html",
+				//url:  { href:"http://blc:80/normal/index.html" },
 				redirects: [],
 			});
 			
@@ -71,17 +74,18 @@ describe("INTERNAL -- requestUrl", function()
 	// TODO :: results in "socket hang up" econnreset error
 	it.skip("does not receive a PSEUDO-HEAD stream", function()
 	{
+		const auth = {};
 		const options = helpers.options();
 		const url = new URL("http://blc/normal/index.html");
 		
-		return requestUrl(url, "pseudo-head", options).then(result =>
+		return requestUrl(url, auth, "pseudo-head", options).then(result =>
 		{
 			expect(result.response).to.be.like(
 			{
 				headers: { "content-type": "text/html" },
 				status: 200,
 				statusText: null,
-				//url: "http://blc:80/normal/index.html",
+				//url:  { href:"http://blc:80/normal/index.html" },
 				redirects: [],
 			});
 			
@@ -93,11 +97,12 @@ describe("INTERNAL -- requestUrl", function()
 	
 	it("supports a redirect", function()
 	{
+		const auth = {};
 		const options = helpers.options();
 		const url = new URL("http://blc/redirect/redirect.html");
 		//const url = new URL("http://blc/normal/index.html");
 		
-		return requestUrl(url, "get", options).then(result =>
+		return requestUrl(url, auth, "get", options).then(result =>
 		{
 			expect(result.response).to.be.like(
 			{

@@ -21,6 +21,7 @@ describe("INTERNAL -- streamHtml", function()
 	{
 		return streamHtml(
 			new URL("http://blc/normal/no-links.html"),
+			{},
 			null,
 			helpers.options()
 		)
@@ -37,6 +38,7 @@ describe("INTERNAL -- streamHtml", function()
 	{
 		return streamHtml(
 			new URL("http://blc/redirect/redirect.html"),
+			{},
 			null,
 			helpers.options()
 		)
@@ -55,6 +57,7 @@ describe("INTERNAL -- streamHtml", function()
 		
 		return streamHtml(
 			new URL("http://blc/non-html/image.gif"),
+			{},
 			null,
 			helpers.options()
 		)
@@ -81,6 +84,7 @@ describe("INTERNAL -- streamHtml", function()
 		
 		return streamHtml(
 			new URL("http://blc/non-html/empty"),
+			{},
 			null,
 			helpers.options()
 		)
@@ -107,6 +111,7 @@ describe("INTERNAL -- streamHtml", function()
 		
 		return streamHtml(
 			new URL("http://blc/normal/fake.html"),
+			{},
 			null,
 			helpers.options()
 		)
@@ -133,6 +138,7 @@ describe("INTERNAL -- streamHtml", function()
 		
 		return streamHtml(
 			"/normal/fake.html",
+			{},
 			null,
 			helpers.options()
 		)
@@ -163,6 +169,7 @@ describe("INTERNAL -- streamHtml", function()
 			
 			return streamHtml(
 				new URL("http://blc/normal/no-links.html"),
+				{},
 				cache,
 				helpers.options({ cacheResponses:true })
 			)
@@ -178,6 +185,7 @@ describe("INTERNAL -- streamHtml", function()
 			
 			return streamHtml(
 				new URL("http://blc/redirect/redirect.html"),
+				{},
 				cache,
 				helpers.options({ cacheResponses:true })
 			)
@@ -205,6 +213,7 @@ describe("INTERNAL -- streamHtml", function()
 			
 			return streamHtml(
 				new URL("http://blc/non-html/image.gif"),
+				{},
 				cache,
 				helpers.options({ cacheResponses:true })
 			)
@@ -231,6 +240,7 @@ describe("INTERNAL -- streamHtml", function()
 			
 			return streamHtml(
 				new URL("http://blc/normal/fake.html"),
+				{},
 				cache,
 				helpers.options({ cacheResponses:true })
 			)
@@ -257,6 +267,7 @@ describe("INTERNAL -- streamHtml", function()
 			
 			return streamHtml(
 				"/normal/fake.html",
+				{},
 				cache,
 				helpers.options({ cacheResponses:true })
 			)

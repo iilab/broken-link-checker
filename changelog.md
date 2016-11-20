@@ -4,6 +4,9 @@
   * options changed: `acceptedSchemes`, `excludedSchemes`
   * arguments removed: `baseUrl` from `UrlChecker.prototype.enqueue()`
   * [WHATWG URL specification](https://url.spec.whatwg.org)-compliance
+  * added support for HTTP auth
+  * added support for HTTP proxies
+  * added support for file:// protocol
   * added missing tags/attributes
   * test suite improvements
   * bug fixes

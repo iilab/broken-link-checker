@@ -24,13 +24,15 @@ describe("INTERNAL -- checkUrl", function()
 	
 	it("resolves a promise", function(done)
 	{
+		const auth = {};
+		const cache = new UrlCache();
 		const options = helpers.options();
 		const link = Link.resolve(Link.create(),
 			"http://blc/normal/no-links.html",
 			"http://blc/"
 		);
 		
-		checkUrl(link, new UrlCache(), options).then(result => done());
+		checkUrl(link, auth, cache, options).then(result => done());
 	});
 	
 	
@@ -39,13 +41,15 @@ describe("INTERNAL -- checkUrl", function()
 	{
 		it("an absolute url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"http://blc/normal/no-links.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -77,13 +81,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a scheme-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"//blc/normal/no-links.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -115,13 +121,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a root-path-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"/normal/no-links.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -153,13 +161,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a path-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"normal/no-links.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -191,13 +201,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a query-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"?query",
 				"http://blc/normal/no-links.html"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -229,13 +241,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a hash-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"#hash",
 				"http://blc/normal/no-links.html"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -267,13 +281,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("an empty url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"",
 				"http://blc/normal/no-links.html"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -308,13 +324,15 @@ describe("INTERNAL -- checkUrl", function()
 	{
 		it("an absolute url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"http://blc/normal/fake.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -346,13 +364,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a scheme-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"//blc/normal/fake.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -384,13 +404,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a root-path-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"/normal/fake.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -422,13 +444,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a path-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"normal/fake.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -460,13 +484,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a query-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"?query",
 				"http://blc/normal/fake.html"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -498,13 +524,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a hash-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"#hash",
 				"http://blc/normal/fake.html"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -536,13 +564,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("an empty url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"",
 				"http://blc/normal/fake.html"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -579,13 +609,15 @@ describe("INTERNAL -- checkUrl", function()
 	{
 		it("an absolute url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"http://blc:82/path/to/resource.html",
 				"http://blc:82/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -616,13 +648,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a scheme-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"//blc:82/path/to/resource.html",
 				"http://blc:82/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -653,13 +687,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a root-path-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"/path/to/resource.html",
 				"http://blc:82/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -690,13 +726,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a path-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"path/to/resource.html",
 				"http://blc:82/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -727,13 +765,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a query-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"?query",
 				"http://blc:82/path/to/resource.html"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -764,13 +804,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a hash-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"#hash",
 				"http://blc:82/path/to/resource.html"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -801,13 +843,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("an empty url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"",
 				"http://blc:82/path/to/resource.html"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -841,13 +885,15 @@ describe("INTERNAL -- checkUrl", function()
 	{
 		it("an absolute url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"http://",
 				null
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -878,13 +924,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a scheme-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"//blc/normal/no-links.html",
 				null
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -915,13 +963,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a root-path-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"/normal/no-links.html",
 				null
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -952,13 +1002,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a path-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"normal/no-links.html",
 				null
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -989,13 +1041,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a query-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"?query",
 				null
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1026,13 +1080,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a hash-relative url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"#hash",
 				null
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1063,13 +1119,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("an empty url", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"",
 				null
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1103,13 +1161,15 @@ describe("INTERNAL -- checkUrl", function()
 	{
 		it("a data uri", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACH/C1hNUCBEYXRhWE1QAz94cAAsAAAAAAEAAQAAAgJEAQA7",
 				null
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1140,13 +1200,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("a tel uri", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"tel:+5-555-555-5555",
 				null
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1180,13 +1242,15 @@ describe("INTERNAL -- checkUrl", function()
 	{
 		it("containing no query or hash", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"http://blc/redirect/redirect.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1218,13 +1282,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("containing a query", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"http://blc/redirect/redirect.html?query",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1256,13 +1322,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("containing a hash", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"http://blc/redirect/redirect.html#hash",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1297,6 +1365,7 @@ describe("INTERNAL -- checkUrl", function()
 	{
 		it("stores the response", function()
 		{
+			const auth = {};
 			const cache = new UrlCache();
 			const options = helpers.options({ cacheResponses:true });
 			const link = Link.resolve(Link.create(),
@@ -1304,7 +1373,7 @@ describe("INTERNAL -- checkUrl", function()
 				"http://blc/"
 			);
 			
-			return checkUrl(link, cache, options)
+			return checkUrl(link, auth, cache, options)
 			.then(result => cache.get("http://blc/normal/no-links.html"))
 			.then(response => expect(response).to.be.an("object"));
 		});
@@ -1313,6 +1382,7 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("stores the response of a redirected url", function()
 		{
+			const auth = {};
 			const cache = new UrlCache();
 			const options = helpers.options({ cacheResponses:true });
 			const link = Link.resolve(Link.create(),
@@ -1320,7 +1390,7 @@ describe("INTERNAL -- checkUrl", function()
 				"http://blc/"
 			);
 			
-			return checkUrl(link, cache, options)
+			return checkUrl(link, auth, cache, options)
 			.then(result => cache.get("http://blc/redirect/redirect.html"))
 			.then(response => expect(response).to.be.an("object"))
 			.then(() => cache.get("http://blc/redirect/redirected.html"))
@@ -1331,6 +1401,7 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("does not store the error from an erroneous url", function()
 		{
+			const auth = {};
 			const cache = new UrlCache();
 			const options = helpers.options({ cacheResponses:true });
 			const link = Link.resolve(Link.create(),
@@ -1338,7 +1409,7 @@ describe("INTERNAL -- checkUrl", function()
 				null
 			);
 			
-			return checkUrl(link, cache, options)
+			return checkUrl(link, auth, cache, options)
 			.then(result => cache.get("/normal/fake.html"))
 			.then(response => expect(response).to.be.undefined);
 		});
@@ -1347,14 +1418,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("requests a unique url only once", function()
 		{
+			const auth = {};
 			const cache = new UrlCache();
 			const options = helpers.options({ cacheResponses:true });
-			var link = Link.resolve(Link.create(),
+			let link = Link.resolve(Link.create(),
 				"http://blc/normal/no-links.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, cache, options)
+			return checkUrl(link, auth, cache, options)
 			.then(result => cache.get("http://blc/normal/no-links.html"))
 			.then(response => response._cached = true)
 			.then(() =>
@@ -1365,7 +1437,7 @@ describe("INTERNAL -- checkUrl", function()
 					"http://blc/"
 				);
 				
-				return checkUrl(link, cache, options);
+				return checkUrl(link, auth, cache, options);
 			})
 			.then(() => cache.get("http://blc/normal/no-links.html"))
 			.then(response => expect(response._cached).to.be.true);
@@ -1378,13 +1450,15 @@ describe("INTERNAL -- checkUrl", function()
 	{
 		it("acceptedSchemes = []", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options({ acceptedSchemes:[] });
 			const link = Link.resolve(Link.create(),
 				"http://blc/normal/no-links.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1400,6 +1474,7 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it('acceptedSchemes = ["http:","https:"]', function()
 		{
+			const auth = {};
 			const cache = new UrlCache();
 			const options = helpers.options({ acceptedSchemes:["http:","https:"] });
 			
@@ -1408,7 +1483,7 @@ describe("INTERNAL -- checkUrl", function()
 				return Link.resolve(Link.create(), url);
 			}
 			
-			return checkUrl(link("http://blc/normal/no-links.html"), cache, options)
+			return checkUrl(link("http://blc/normal/no-links.html"), auth, cache, options)
 			.then(result => expect(result).to.be.like(
 			{
 				broken: false,
@@ -1416,7 +1491,7 @@ describe("INTERNAL -- checkUrl", function()
 				excluded: null,
 				excludedReason: null
 			}))
-			.then(() => checkUrl(link("https://blc:81/normal/no-links.html"), cache, options))
+			.then(() => checkUrl(link("https://blc:81/normal/no-links.html"), auth, cache, options))
 			.then(result => expect(result).to.be.like(
 			{
 				broken: false,
@@ -1430,13 +1505,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("retry405Head = false", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options();
 			const link = Link.resolve(Link.create(),
 				"http://blc/method-not-allowed/head.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1452,13 +1529,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("retry405Head = false (#2)", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options({ requestMethod:"get" });
 			const link = Link.resolve(Link.create(),
 				"http://blc/method-not-allowed/any.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1474,13 +1553,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("retry405Head = true", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options({ retry405Head:true });
 			const link = Link.resolve(Link.create(),
 				"http://blc/method-not-allowed/head.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{
@@ -1496,13 +1577,15 @@ describe("INTERNAL -- checkUrl", function()
 		
 		it("retry405Head = true (#2)", function()
 		{
+			const auth = {};
+			const cache = new UrlCache();
 			const options = helpers.options({ retry405Head:true });
 			const link = Link.resolve(Link.create(),
 				"http://blc/method-not-allowed/any.html",
 				"http://blc/"
 			);
 			
-			return checkUrl(link, new UrlCache(), options).then(result =>
+			return checkUrl(link, auth, cache, options).then(result =>
 			{
 				expect(result).to.be.like(
 				{

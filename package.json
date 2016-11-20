@@ -21,6 +21,7 @@
     "extend": "^3.0.0",
     "humanize-duration": "^3.10.0",
     "http-equiv-refresh": "^1.0.0",
+    "is-promise": "^2.1.0",
     "is-stream": "^1.1.0",
     "is-string": "^1.0.4",
     "limited-request-queue": "^3.0.4",
@@ -30,10 +31,12 @@
     "nopter": "~0.3.0",
     "parse5": "^3.0.1",
     "parse-srcset": "^1.0.2",
+    "proxy-from-env": "~0.1.1",
     "robot-directives": "~0.3.0",
     "robots-txt-guard": "~0.1.0",
     "robots-txt-parse": "~0.0.4",
     "specurl": "stevenvachon/specurl",
+    "tunnel": "0.0.4",
     "urlcache": "stevenvachon/urlcache"
   },
   "devDependencies": {

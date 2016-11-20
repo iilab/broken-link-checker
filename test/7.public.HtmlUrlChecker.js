@@ -410,6 +410,46 @@ describe("PUBLIC -- HtmlUrlChecker", function()
 			instance.enqueue("http://blc/normal/fake.html");
 			instance.enqueue("http://blc/normal/no-links.html");
 		});
+		
+		
+		
+		// TODO :: check page with absolute urls containing no auth so that URL is re-checked with cached auth (if any) after 401
+		it("supports pages behind basic auth", function(done)
+		{
+			let linkCount = 0;
+			let pageCalled = false;
+			
+			const instance = new HtmlUrlChecker( helpers.options(),
+			{
+				link: function(result)
+				{
+					switch (result.html.offsetIndex)
+					{
+						case 0: expect(result.broken).to.be.false; break;
+						case 1: expect(result.broken).to.be.false; break;
+						case 2: expect(result.broken).to.be.false; break;
+						case 3: expect(result.broken).to.be.true;  break;
+						case 4: expect(result.broken).to.be.true;  break;
+						case 5: expect(result.broken).to.be.true;  break;
+					}
+					
+					linkCount++;
+				},
+				page: function(error)
+				{
+					expect(error).to.not.be.an.instanceOf(Error);
+					pageCalled = true;
+				},
+				end: function()
+				{
+					expect(linkCount).to.equal(6);
+					expect(pageCalled).to.be.true;
+					done();
+				}
+			});
+			
+			instance.enqueue("http://user:pass@blc/auth/index.html");
+		});
 	});
 	
 	

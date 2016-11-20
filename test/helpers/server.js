@@ -29,9 +29,9 @@ function addMock(...urls)
 {
 	for (let i=0; i<urls.length; i++)
 	{
-		let mock = nock(urls[i]);
+		let instance = nock(urls[i]);
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: ["/", "/index.html"],
 			methods: 
@@ -45,7 +45,52 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
+		{
+			path: "/auth/index.html",
+			auth: { user:"user", pass:"pass" },
+			methods: 
+			{
+				all:
+				{
+					body: stream("/auth/index.html"),
+					headers: { "content-type":"text/html" },
+					statusCode: 200
+				}
+			}
+		});
+		
+		intercept(instance, 
+		{
+			path: "/auth/intransitive.html",
+			auth: { user:"user2", pass:"pass2" },
+			methods: 
+			{
+				all:
+				{
+					body: stream("/auth/intransitive.html"),
+					headers: { "content-type":"text/html" },
+					statusCode: 200
+				}
+			}
+		});
+		
+		intercept(instance, 
+		{
+			path: "/auth/transitive.html",
+			auth: { user:"user", pass:"pass" },
+			methods: 
+			{
+				all:
+				{
+					body: stream("/auth/transitive.html"),
+					headers: { "content-type":"text/html" },
+					statusCode: 200
+				}
+			}
+		});
+		
+		intercept(instance, 
 		{
 			path: "/circular-redirect/redirect.html",
 			methods: 
@@ -58,7 +103,7 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: "/disallowed/header.html",
 			methods: 
@@ -77,7 +122,7 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: "/method-not-allowed/any.html",
 			methods: 
@@ -86,7 +131,7 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: "/method-not-allowed/head.html",
 			methods: 
@@ -103,7 +148,7 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: "/non-html/empty",
 			methods: 
@@ -116,7 +161,7 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: "/non-html/image.gif",
 			methods: 
@@ -130,7 +175,7 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: "/normal/fake.html",
 			methods: 
@@ -139,7 +184,7 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: "/redirect/redirect.html",
 			methods: 
@@ -152,7 +197,7 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: "/redirect/redirect2.html",
 			methods: 
@@ -165,7 +210,7 @@ function addMock(...urls)
 			}
 		});
 		
-		intercept(mock, 
+		intercept(instance, 
 		{
 			path: "/robots.txt",
 			methods: 
@@ -202,7 +247,7 @@ function addMock(...urls)
 		]
 		.forEach(path =>
 		{
-			intercept(mock, 
+			intercept(instance, 
 			{
 				path: path,
 				methods: 
@@ -227,7 +272,7 @@ function addMock(...urls)
 				
 				// Redirect first mock to next mock
 				// TODO :: make this more explicit in test suite somehow -- special case object for server, created per test?
-				intercept(mock, 
+				intercept(instance, 
 				{
 					path: "/external-redirect/redirect.html",
 					methods: 
@@ -244,7 +289,7 @@ function addMock(...urls)
 		else
 		{
 			// Cannot redirect to another mock -- make sure test fails
-			intercept(mock, 
+			intercept(instance, 
 			{
 				path: "/external-redirect/redirect.html",
 				methods: 
@@ -277,7 +322,14 @@ function intercept(nockInstance, config)
 		
 		if (config.methods.get != null)
 		{
-			nockInstance.get(pattern).times(Infinity).reply((url, requestBody) =>
+			let interception = nockInstance.get(pattern);
+			
+			if (config.auth != null)
+			{
+				interception = interception.basicAuth(config.auth);
+			}
+			
+			interception.times(Infinity).reply((url, requestBody) =>
 			{
 				const body = (typeof config.methods.get.body === "function") ? config.methods.get.body() : null;
 				
@@ -287,7 +339,14 @@ function intercept(nockInstance, config)
 		
 		if (config.methods.head != null)
 		{
-			nockInstance.head(pattern).times(Infinity).reply((url, requestBody) =>
+			let interception = nockInstance.head(pattern);
+			
+			if (config.auth != null)
+			{
+				interception = interception.basicAuth(config.auth);
+			}
+			
+			interception.times(Infinity).reply((url, requestBody) =>
 			{
 				return [config.methods.head.statusCode, null, config.methods.head.headers];
 			});
